@@ -1,10 +1,10 @@
 import Welcome from "../welcome/Welcome";
 import Login from "../Login/Login";
 import SignUp from "../SignUp/SignUp";
-import { Teste } from "../teste/teste";
-import { Teste1 } from "../teste1/teste";
+import { Home } from "../home/home";
+import { Account } from "../account/account";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import Ionic from "react-native-vector-icons/Ionicons";
 
 const Tab = createBottomTabNavigator();
 
@@ -13,25 +13,26 @@ export function Main() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
-          let iconName = "";
+          let iconName;
 
           if (route.name === "Home") {
-            iconName = focused
-              ? "ios-information-circle"
-              : "ios-information-circle-outline";
-          } else if (route.name === "Settings") {
-            iconName = focused ? "ios-list" : "ios-list-outline";
+            iconName = focused ? "home" : "home-outline";
+          } else if (route.name === "Account") {
+            iconName = focused ? "person-circle" : "person-circle-outline";
           }
 
-          // You can return any component that you like here!
-          return <Ionicons name={iconName} size={size} color={color} />;
+          return <Ionic name={iconName} size={32} color={color} />;
         },
-        tabBarActiveTintColor: "tomato",
+        tabBarActiveTintColor: "#A09DF7",
         tabBarInactiveTintColor: "gray",
+
+        tabBarLabel: () => {
+          return null;
+        },
       })}
     >
-      <Tab.Screen name="Teste" component={Teste} />
-      <Tab.Screen name="Teste1" component={Teste1} />
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Account" component={Account} />
     </Tab.Navigator>
   );
 }

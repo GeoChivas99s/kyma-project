@@ -2,8 +2,8 @@ import React from "react";
 
 import { View, Text } from "react-native";
 
-export const Teste = () => {
+export const Home = () => {
   <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-    <Text>Tester!</Text>
+    <Text>Home</Text>
   </View>;
 };
