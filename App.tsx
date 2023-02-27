@@ -1,26 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
-import { FC } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StatusBar } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
 
-interface Iprops {
-name : string 
+import { Routes } from "./src/pages/routes/routes";
 
-}
-
-export default function App ( { name = " Geossssss" } :  Iprops ) {
+export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Lindo mesmo!{name}</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <StatusBar backgroundColor="#A09DF7" barStyle="light-content" />
+      <Routes />
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
