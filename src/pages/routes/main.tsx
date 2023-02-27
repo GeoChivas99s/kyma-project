@@ -12,6 +12,21 @@ export function Main() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          backgroundColor: "white",
+          position: "absolute",
+          bottom: 40,
+          marginHorizontal: 20,
+          height: 60,
+          borderRadius: 10,
+          shadowColor: "#000",
+          shadowOpacity: 0.06,
+          shadowOffset: {
+            width: 10,
+            height: 10,
+          },
+        },
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
@@ -21,18 +36,21 @@ export function Main() {
             iconName = focused ? "person-circle" : "person-circle-outline";
           }
 
-          return <Ionic name={iconName} size={32} color={color} />;
+          return (
+            <Ionic
+              name={iconName}
+              style={{ position: "absolute", top: "50%" }}
+              size={size}
+              color={color}
+            />
+          );
         },
         tabBarActiveTintColor: "#A09DF7",
         tabBarInactiveTintColor: "gray",
-
-        tabBarLabel: () => {
-          return null;
-        },
       })}
     >
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Account" component={Account} />
+      <Tab.Screen name="Home" component={Home}></Tab.Screen>
+      <Tab.Screen name="Account" component={Account}></Tab.Screen>
     </Tab.Navigator>
   );
 }
