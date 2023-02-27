@@ -1,10 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
+import { FC } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+interface Iprops {
+name : string 
+
+}
+
+export default function App ( { name = " Geossssss" } :  Iprops ) {
   return (
     <View style={styles.container}>
-      <Text>Lindo mesmo!</Text>
+      <Text>Lindo mesmo!{name}</Text>
       <StatusBar style="auto" />
     </View>
   );
