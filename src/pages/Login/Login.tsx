@@ -42,12 +42,12 @@ export default function Login() {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => {}}
         >
-          <Text style={styles.buttonText}>Acessar</Text>
+          <Text style={styles.buttonText}>Entrar</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-          <Text style={styles.buttonText}>Maskjahshas</Text>
+        <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate("SignUp")}>
+          <Text style={styles.buttonText}>Criar Conta</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
