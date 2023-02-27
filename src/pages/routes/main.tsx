@@ -5,7 +5,8 @@ import { Home } from "../home/home";
 import { Account } from "../account/account";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionic from "react-native-vector-icons/Ionicons";
-
+import { EmptyScreen } from "../emptyScreen/emptyScreen";
+import { TouchableOpacity } from "react-native";
 const Tab = createBottomTabNavigator();
 
 export function Main() {
@@ -26,6 +27,7 @@ export function Main() {
             width: 10,
             height: 10,
           },
+          paddingHorizontal: 20,
         },
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
@@ -40,7 +42,7 @@ export function Main() {
             <Ionic
               name={iconName}
               style={{ position: "absolute", top: "50%" }}
-              size={size}
+              size={30}
               color={color}
             />
           );
@@ -49,8 +51,16 @@ export function Main() {
         tabBarInactiveTintColor: "gray",
       })}
     >
-      <Tab.Screen name="Home" component={Home}></Tab.Screen>
-      <Tab.Screen name="Account" component={Account}></Tab.Screen>
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{ headerShown: false }}
+      ></Tab.Screen>
+      <Tab.Screen
+        name="Account"
+        component={Account}
+        options={{ headerShown: false }}
+      ></Tab.Screen>
     </Tab.Navigator>
   );
 }
