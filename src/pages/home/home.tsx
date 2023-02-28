@@ -39,7 +39,7 @@ export default function Home() {
     },
   ];
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.title}>
         <Text style={styles.message}> Olá, Geovane </Text>
       </View>
@@ -62,7 +62,7 @@ export default function Home() {
         <FuncCard name="Alguns exercícios" icon="information-circle" />
       </View>
 
-      <ScrollView
+      {/* <ScrollView
         style={styles.bannerContainer}
         showsHorizontalScrollIndicator={false}
         horizontal={true}
@@ -70,7 +70,7 @@ export default function Home() {
         {data.map((item: Iprops) => {
           return <MicroCard key={item.key} name={item.name} icon={item.icon} />;
         })}
-      </ScrollView>
+      </ScrollView> */}
     </ScrollView>
   );
 }
@@ -106,5 +106,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingEnd: 10,
     flexWrap: "wrap",
+    marginBottom:150
   },
 });

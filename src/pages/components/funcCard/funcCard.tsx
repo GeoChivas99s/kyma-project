@@ -1,15 +1,16 @@
 import React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View, Button } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import { Alert } from "react-native";
 interface Iprops {
   name: string;
   icon: string;
 }
-export default function FuncCard({ name, icon }: Iprops) {
+export default function FuncCard({ name, icon}: Iprops) {
 
   return (
-    <View style={styles.container}>
-      <View>
+    <View style={styles.container}  >
+      <View onTouchStart={()=> Alert.alert("Lindo memso!!")}>
         <Icon name={icon} size={50} color={"#4E4E4E"} />
       </View>
       <Text style={styles.description}>{name}</Text>
