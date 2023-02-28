@@ -23,7 +23,7 @@ export default function Banner() {
 const styles = StyleSheet.create({
   container: {
  //   borderWidth: 1,
-    height: 190,
+    height: 140,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -46,12 +46,11 @@ const styles = StyleSheet.create({
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
-    flex: 2,
+    flex: 1,
   },
   textWrapper: {
     flex: 3,
-  //  borderWidth: 3,
-    paddingBottom: 70,
+    paddingBottom: 50,
    paddingTop: 40,
     height: "100%", 
     justifyContent: "space-between"
@@ -61,6 +60,7 @@ const styles = StyleSheet.create({
    fontWeight:"bold", 
    fontSize: 20
   },subTitle: {
-    fontSize: 20
+    fontSize: 18, 
+    flexWrap:"wrap"
   }
 });
