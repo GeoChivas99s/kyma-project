@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "#A09DF7",
+      backgroundColor: "#8381ca",
     },
     containerHeader: {
       marginTop: "14%",
@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
     },
     input: {
       borderBottomWidth: 1,
-      borderBottomColor: "#A09DF7",
+      borderBottomColor: "#8381ca",
       height: 40 , 
       marginBottom: 12 , 
       fontSize: 16
@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
       fontWeight: 'bold'
     },
     button: {
-      backgroundColor: "#A09DF7",
+      backgroundColor: "#8381ca",
       width: "100%" , 
       borderRadius: 4 , 
       paddingVertical: 8, 

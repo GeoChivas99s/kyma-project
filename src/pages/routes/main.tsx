@@ -47,7 +47,7 @@ export function Main() {
             />
           );
         },
-        tabBarActiveTintColor: "#A09DF7",
+        tabBarActiveTintColor: "#8381ca",
         tabBarInactiveTintColor: "gray",
       })}
     >

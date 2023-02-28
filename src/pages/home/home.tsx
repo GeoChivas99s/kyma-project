@@ -1,27 +1,41 @@
 import React from "react";
 
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import Banner from "../components/banner/banner";
+import MicroCard from "../components/microCard/microCard";
 export default function Home() {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.title}>
         <Text style={styles.message}> Olá, Geovane </Text>
       </View>
       <View style={styles.bannerContainer}>
         <Banner />
       </View>
+      <ScrollView style={styles.bannerContainer} showsHorizontalScrollIndicator={false} horizontal={true}>
+    
+      <MicroCard name="Home" icon="home"/>
+      <MicroCard name="Home" icon="home"/>
+      <MicroCard name="Home" icon="home"/>
+      <MicroCard name="Home" icon="home"/>
+      <MicroCard name="Home" icon="home"/>
+      <MicroCard name="Home" icon="home"/>
+      <MicroCard name="Home" icon="home"/>
+      <MicroCard name="Home" icon="home"/>
+      <MicroCard name="Home" icon="home"/>
+      <MicroCard name="Home" icon="home"/>
+      </ScrollView>
       {/* <View style={styles.imageContainer}>
         <Text>Lindo mesmo</Text>
       </View> */}
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#A09DF7",
+    backgroundColor: "#8381ca",
 
 
   },

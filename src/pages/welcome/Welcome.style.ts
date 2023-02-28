@@ -3,13 +3,13 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "#A09DF7",
+      backgroundColor: "#8381ca",
     },
     containerLogo: {
       flex: 2,
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "#A09DF7",
+      backgroundColor: "#8381ca",
     },
     containerForm: {
       flex: 1,
@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
     },
     button: {
       position: "absolute",
-      backgroundColor: "#A09DF7",
+      backgroundColor: "#8381ca",
       borderRadius: 15,
       paddingVertical: 8,
       width: "60%",
