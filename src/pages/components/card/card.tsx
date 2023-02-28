@@ -6,9 +6,12 @@ export default function Card() {
       <View style={styles.imageContainer}>
         <Image
           source={require("./logo.png")}
-          style={{ width: "80%" }}
+          style={{ width: "100%" }}
           resizeMode="contain"
         />
+      </View>
+      <View>
+
       </View>
     </View>
   );
@@ -20,7 +23,10 @@ const styles = StyleSheet.create({
     padding: 10,
     height: 50,
     width: 50,
-    borderColor: "red",
+    backgroundColor: "#A09DF7",
+
   },
-  imageContainer: {},
+  imageContainer: {
+    flex: 2
+  },
 });

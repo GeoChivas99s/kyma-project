@@ -1,7 +1,7 @@
 import Welcome from "../welcome/Welcome";
 import Login from "../Login/Login";
 import SignUp from "../SignUp/SignUp";
-import { Home } from "../home/home";
+import Home  from "../home/home";
 import { Account } from "../account/account";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionic from "react-native-vector-icons/Ionicons";
