@@ -2,6 +2,7 @@ import Welcome from "../welcome/Welcome";
 import Login from "../Login/Login";
 import SignUp from "../SignUp/SignUp";
 import { Main } from "./main";
+import Reader from "../reader/reader";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,11 @@ export function Routes() {
       <Stack.Screen
         name="Main"
         component={Main}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Reader"
+        component={Reader}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

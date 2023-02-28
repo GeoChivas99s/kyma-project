@@ -5,8 +5,9 @@ import Banner from "../components/banner/banner";
 import MicroCard from "../components/microCard/microCard";
 import FuncCard from "../components/funcCard/funcCard";
 import * as Speech from "expo-speech";
-
+import { useNavigation } from "@react-navigation/native";
 export default function Home() {
+  const navigate = useNavigation();
   type Iprops = {
     name: string;
     icon: string;
@@ -58,7 +59,7 @@ export default function Home() {
         })}
       </ScrollView>
       <View style={styles.cardsWrapper}>
-        <FuncCard name="Leitura Assistida" icon="book" />
+        <FuncCard name="Leitura Assistida" icon="book" onClick={()=>navigate.navigate("Reader")}/>
         <FuncCard name="Gerador de texto" icon="text" />
         <FuncCard name="Efeito playback atrasado" icon="mic" />
         <FuncCard name="Alguns exercícios" icon="information-circle" />
