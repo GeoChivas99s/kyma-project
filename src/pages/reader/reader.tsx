@@ -1,5 +1,4 @@
-
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,23 +6,34 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
-  
+  ScrollView,
 } from "react-native";
 import { styles } from "./reader.styles";
 import * as Animatable from "react-native-animatable";
 import { useNavigation } from "@react-navigation/native";
-import * as Speech from 'expo-speech';
-
+import * as Speech from "expo-speech";
+import Icon from "react-native-vector-icons/Ionicons";
 
 export default function Reader() {
-    const speak = () => {
-        const thingToSay = "Durante o ano fiscal (6 de abril de 2022 - 5 de abril de 2023), você estará nos Estados Unidos da América por 183 dias ou mais?";
-        Speech.speak(thingToSay,{
-          language: "pt-BR", 
-          pitch:1,
-          rate:1
-        });
-      };
+  const teste =
+    "Mas as armas e as letras juntamente, Que de África o governo sustentavam, Não bastando a vencer o forte vento, Com que os mares do sul se levantavam, Ainda por cima afrontavam, contento, O furor dos que à morte se entregavam; Que nem por isso viam diminuída A raiva com que a morte recebida";
+
+  const [text, setText] = useState(teste);
+  const speak = () => {
+    const thingToSay =
+      "Durante o ano fiscal (6 de abril de 2022 - 5 de abril de 2023), você estará nos Estados Unidos da América por 183 dias ou mais?";
+    Speech.speak(text, {
+      language: "pt-BR",
+      pitch: 1,
+      rate: 1,
+    });
+  };
+
+  type textProps = {
+    id: number;
+    value: string;
+  };
+
   const navigation = useNavigation();
 
   return (
@@ -34,30 +44,28 @@ export default function Reader() {
         style={styles.containerHeader}
       >
         <Text style={styles.message}>Leitura Assistida</Text>
+        <View>
+          <Text></Text>
+        </View>
       </Animatable.View>
       <Animatable.View animation="fadeInUp" style={styles.containerForm}>
-      <Text style={styles.title}>Nome</Text>
-        <TextInput placeholder="chivas" style={styles.input} />
-
-        <Text style={styles.title}>Email</Text>
-        <TextInput  placeholder="einf.m1@gmail.com" style={styles.input} />
-
-        <Text style={styles.title}>Senha</Text>
-        <TextInput placeholder="Bt4opSd9" style={styles.input} />
-
-        <Text style={styles.title}>Repetir Senha</Text>
-        <TextInput placeholder="Bt4opSd9" style={styles.input} />
-
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Registar</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.buttonRegister}
-          onPress={() => navigation.navigate("Login")}
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <TouchableOpacity style={styles.button} onPress={speak}>
+            <Text style={styles.buttonText}>
+              <Icon name="play" size={40} />
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>
+              <Icon name="reload-circle" size={40} />
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <ScrollView
+          style={{ width: "100%", padding: 5, height: "100%", marginTop: 30 }}
         >
-          <Text style={styles.registerText}>Já possui uma conta? Entre</Text>
-        </TouchableOpacity>
+          <Text style={{ textAlign: "justify", fontSize: 20 }}>{teste}</Text>
+        </ScrollView>
       </Animatable.View>
     </View>
   );

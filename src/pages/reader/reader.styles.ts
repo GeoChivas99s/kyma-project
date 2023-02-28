@@ -40,8 +40,8 @@ export const styles = StyleSheet.create({
     },
     button: {
       backgroundColor: "#8381ca",
-      width: "100%" , 
-      borderRadius: 4 , 
+      width: "45%" , 
+      borderRadius: 10 , 
       paddingVertical: 8, 
       marginTop: 14 ,
       justifyContent: "center", 

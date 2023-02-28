@@ -7,6 +7,7 @@ import FuncCard from "../components/funcCard/funcCard";
 import * as Speech from "expo-speech";
 import { useNavigation } from "@react-navigation/native";
 export default function Home() {
+  
   const navigate = useNavigation();
   type Iprops = {
     name: string;
