@@ -1,16 +1,25 @@
 import React from "react";
 
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Button, Text, StyleSheet, ScrollView } from "react-native";
 import Banner from "../components/banner/banner";
 import MicroCard from "../components/microCard/microCard";
 import FuncCard from "../components/funcCard/funcCard";
+import * as Speech from 'expo-speech';
+
 export default function Home() {
   type Iprops = {
     name: string;
     icon: string;
     key: number;
   };
-
+  const speak = () => {
+    const thingToSay = "Durante o ano fiscal (6 de abril de 2022 - 5 de abril de 2023), você estará nos Estados Unidos da América por 183 dias ou mais?";
+    Speech.speak(thingToSay,{
+      language: "pt-BR", 
+      pitch:1,
+      rate:1
+    });
+  };
   const data: Iprops[] = [
     {
       name: "home",
@@ -42,6 +51,7 @@ export default function Home() {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.title}>
         <Text style={styles.message}> Olá, Geovane </Text>
+        <Button title="Press to hear some words" onPress={speak} />
       </View>
       <View style={styles.bannerContainer}>
         <Banner />
