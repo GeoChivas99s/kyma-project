@@ -4,7 +4,7 @@ import { View, Button, Text, StyleSheet, ScrollView } from "react-native";
 import Banner from "../components/banner/banner";
 import MicroCard from "../components/microCard/microCard";
 import FuncCard from "../components/funcCard/funcCard";
-import * as Speech from 'expo-speech';
+import * as Speech from "expo-speech";
 
 export default function Home() {
   type Iprops = {
@@ -12,46 +12,38 @@ export default function Home() {
     icon: string;
     key: number;
   };
-  const speak = () => {
-    const thingToSay = "Durante o ano fiscal (6 de abril de 2022 - 5 de abril de 2023), você estará nos Estados Unidos da América por 183 dias ou mais?";
-    Speech.speak(thingToSay,{
-      language: "pt-BR", 
-      pitch:1,
-      rate:1
-    });
-  };
+
   const data: Iprops[] = [
     {
       name: "home",
       icon: "home",
-      key: 1
+      key: 1,
     },
     {
       name: "home",
       icon: "home",
-      key: 2
+      key: 2,
     },
     {
       name: "home",
       icon: "home",
-      key: 3
+      key: 3,
     },
     {
       name: "home",
       icon: "home",
-      key: 4
+      key: 4,
     },
     {
       name: "home",
       icon: "home",
-      key: 5
+      key: 5,
     },
   ];
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.title}>
         <Text style={styles.message}> Olá, Geovane </Text>
-        <Button title="Press to hear some words" onPress={speak} />
       </View>
       <View style={styles.bannerContainer}>
         <Banner />
@@ -62,7 +54,7 @@ export default function Home() {
         horizontal={true}
       >
         {data.map((item: Iprops) => {
-          return <MicroCard key={item.key}  name={item.name} icon={item.icon} />;
+          return <MicroCard key={item.key} name={item.name} icon={item.icon} />;
         })}
       </ScrollView>
       <View style={styles.cardsWrapper}>
@@ -116,6 +108,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingEnd: 10,
     flexWrap: "wrap",
-    marginBottom:150
+    marginBottom: 150,
   },
 });
