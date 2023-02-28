@@ -22,18 +22,21 @@ const styles = StyleSheet.create({
     //   borderWidth: 2,
     marginTop: 50,
     marginLeft: 20,
-    height: 100,
-    width: 100,
+    padding: 20, 
+    height: 150,
+    width: 180,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 15,
     backgroundColor: "#fff",
+    
   },
   description: {
     fontSize: 16,
     color: "#4E4E4E",
     shadowColor: "#000",
     shadowOpacity: 0.06,
+    textAlign:"center",
     shadowOffset: {
       width: 20,
       height: 30,

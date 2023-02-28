@@ -1,12 +1,13 @@
 import Welcome from "../welcome/Welcome";
 import Login from "../Login/Login";
 import SignUp from "../SignUp/SignUp";
-import Home  from "../home/home";
+import Home from "../home/home";
 import { Account } from "../account/account";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionic from "react-native-vector-icons/Ionicons";
 import { EmptyScreen } from "../emptyScreen/emptyScreen";
 import { TouchableOpacity } from "react-native";
+import Chat from "../chat/chat";
 const Tab = createBottomTabNavigator();
 
 export function Main() {
@@ -36,6 +37,8 @@ export function Main() {
             iconName = focused ? "home" : "home-outline";
           } else if (route.name === "Account") {
             iconName = focused ? "person-circle" : "person-circle-outline";
+          } else if (route.name === "Chat") {
+            iconName = focused ? "chatbubble" : "chatbubble";
           }
 
           return (
@@ -52,13 +55,18 @@ export function Main() {
       })}
     >
       <Tab.Screen
+        name="Account"
+        component={Account}
+        options={{ headerShown: false }}
+      ></Tab.Screen>
+      <Tab.Screen
         name="Home"
         component={Home}
         options={{ headerShown: false }}
       ></Tab.Screen>
       <Tab.Screen
-        name="Account"
-        component={Account}
+        name="Chat"
+        component={Chat}
         options={{ headerShown: false }}
       ></Tab.Screen>
     </Tab.Navigator>
