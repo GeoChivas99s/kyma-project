@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
 import { styles } from "./reader.styles";
 import * as Animatable from "react-native-animatable";
@@ -14,30 +15,28 @@ import * as Speech from "expo-speech";
 import Icon from "react-native-vector-icons/Ionicons";
 import axios from "axios";
 export default function Reader() {
-  const teste =
-    "Mas as armas e as letras juntamente, Que de África o governo sustentavam, Não bastando a vencer o forte vento, Com que os mares do sul se levantavam, Ainda por cima afrontavam, contento, O furor dos que à morte se entregavam; Que nem por isso viam diminuída A raiva com que a morte recebida";
+  const [loading, setLoading] = useState(true);
+  const [text, setText] = useState("");
 
   useEffect(() => {
     (async function () {
       try {
         const data = await axios.post("http://192.168.0.100:5000/api/chatGpt", {
-          prompt: "Crie uma frase com o meu nome Geovane Lindo",
+          prompt: "Crie um texto  com o meu nome",
         });
-        console.log("sdsdsd", data.data);
+        setText(data.data);
+        setLoading(false);
       } catch (ee) {
         console.log(ee);
       }
     })();
   }, []);
 
-  const [text, setText] = useState(teste);
   const speak = () => {
-    const thingToSay =
-      "Durante o ano fiscal (6 de abril de 2022 - 5 de abril de 2023), você estará nos Estados Unidos da América por 183 dias ou mais?";
     Speech.speak(text, {
       language: "pt-BR",
       pitch: 1,
-      rate: 1,
+      rate: 0.7,
     });
   };
 
@@ -56,6 +55,7 @@ export default function Reader() {
         style={styles.containerHeader}
       >
         <Text style={styles.message}>Leitura Assistida</Text>
+
         <View>
           <Text></Text>
         </View>
@@ -76,7 +76,11 @@ export default function Reader() {
         <ScrollView
           style={{ width: "100%", padding: 5, height: "100%", marginTop: 30 }}
         >
-          <Text style={{ textAlign: "justify", fontSize: 20 }}>{teste}</Text>
+          {loading ? (
+            <ActivityIndicator size={"large"} />
+          ) : (
+            <Text style={{ textAlign: "justify", fontSize: 20 }}>{text}</Text>
+          )}
         </ScrollView>
       </Animatable.View>
     </View>
