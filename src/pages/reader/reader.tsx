@@ -17,19 +17,27 @@ import axios from "axios";
 export default function Reader() {
   const [loading, setLoading] = useState(true);
   const [text, setText] = useState("");
+  const generateText = async () => {
+    setLoading(true);
+    stopSpeak();
+    try {
+      const data = await axios.post("http://192.168.0.100:5000/api/chatGpt", {
+        prompt:
+          "Crie um texto aleatório em pt para poder praticar a leitura sem repetir a resposta já gerada por ti",
+      });
+      setText(data.data);
+      setLoading(false);
+    } catch (ee) {
+      console.log(ee);
+    }
+  };
 
   useEffect(() => {
     (async function () {
-      try {
-        const data = await axios.post("http://192.168.0.100:5000/api/chatGpt", {
-          prompt: "Crie um texto  com o meu nome",
-        });
-        setText(data.data);
-        setLoading(false);
-      } catch (ee) {
-        console.log(ee);
-      }
+      generateText();
     })();
+
+    stopSpeak();
   }, []);
 
   const speak = () => {
@@ -38,6 +46,21 @@ export default function Reader() {
       pitch: 1,
       rate: 0.7,
     });
+  };
+  const stopSpeak = () => {
+    Speech.stop();
+  };
+  const pauseAndResumeSpeak = async () => {
+    const isSpeaking = await Speech.isSpeakingAsync();
+    isSpeaking ? Speech.pause() : Speech.resume();
+  };
+
+  const resumeSpeak = () => {
+    Speech.resume();
+  };
+
+  const isSpeaking = async () => {
+    return await Speech.isSpeakingAsync();
   };
 
   type textProps = {
@@ -62,12 +85,20 @@ export default function Reader() {
       </Animatable.View>
       <Animatable.View animation="fadeInUp" style={styles.containerForm}>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <TouchableOpacity style={styles.button} onPress={speak}>
+          <TouchableOpacity
+            style={styles.button}
+            disabled={loading}
+            onPress={speak}
+          >
             <Text style={styles.buttonText}>
               <Icon name="play" size={40} />
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            disabled={loading}
+            onPress={generateText}
+          >
             <Text style={styles.buttonText}>
               <Icon name="reload-circle" size={40} />
             </Text>

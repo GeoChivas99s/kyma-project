@@ -7,7 +7,7 @@ import FuncCard from "../components/funcCard/funcCard";
 import * as Speech from "expo-speech";
 import { useNavigation } from "@react-navigation/native";
 export default function Home() {
-  
+
   const navigate = useNavigation();
   type Iprops = {
     name: string;
@@ -50,7 +50,7 @@ export default function Home() {
       <View style={styles.bannerContainer}>
         <Banner />
       </View>
-      <ScrollView
+      {/* <ScrollView
         style={styles.bannerContainer}
         showsHorizontalScrollIndicator={false}
         horizontal={true}
@@ -58,7 +58,7 @@ export default function Home() {
         {data.map((item: Iprops) => {
           return <MicroCard key={item.key} name={item.name} icon={item.icon} />;
         })}
-      </ScrollView>
+      </ScrollView> */}
       <View style={styles.cardsWrapper}>
         <FuncCard name="Leitura Assistida" icon="book" onClick={()=>navigate.navigate("Reader")}/>
         <FuncCard name="Gerador de texto" icon="text" />
