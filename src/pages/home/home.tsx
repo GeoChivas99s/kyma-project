@@ -5,6 +5,39 @@ import Banner from "../components/banner/banner";
 import MicroCard from "../components/microCard/microCard";
 import FuncCard from "../components/funcCard/funcCard";
 export default function Home() {
+  type Iprops = {
+    name: string;
+    icon: string;
+    key: number;
+  };
+
+  const data: Iprops[] = [
+    {
+      name: "home",
+      icon: "home",
+      key: 1
+    },
+    {
+      name: "home",
+      icon: "home",
+      key: 2
+    },
+    {
+      name: "home",
+      icon: "home",
+      key: 3
+    },
+    {
+      name: "home",
+      icon: "home",
+      key: 4
+    },
+    {
+      name: "home",
+      icon: "home",
+      key: 5
+    },
+  ];
   return (
     <ScrollView style={styles.container}>
       <View style={styles.title}>
@@ -13,44 +46,30 @@ export default function Home() {
       <View style={styles.bannerContainer}>
         <Banner />
       </View>
-     
+      <ScrollView
+        style={styles.bannerContainer}
+        showsHorizontalScrollIndicator={false}
+        horizontal={true}
+      >
+        {data.map((item: Iprops) => {
+          return <MicroCard key={item.key}  name={item.name} icon={item.icon} />;
+        })}
+      </ScrollView>
       <View style={styles.cardsWrapper}>
         <FuncCard name="Leitura Assistida" icon="book" />
         <FuncCard name="Gerador de texto" icon="text" />
-        <FuncCard name="Gravador de aúdio" icon="mic" />
-        <FuncCard name="Alguns Tratamentos" icon="information-circle" />
+        <FuncCard name="Efeito playback atrasado" icon="mic" />
+        <FuncCard name="Alguns exercícios" icon="information-circle" />
       </View>
+
       <ScrollView
         style={styles.bannerContainer}
         showsHorizontalScrollIndicator={false}
         horizontal={true}
       >
-        <MicroCard name="Home" icon="home" />
-        <MicroCard name="Home" icon="home" />
-        <MicroCard name="Home" icon="home" />
-        <MicroCard name="Home" icon="home" />
-        <MicroCard name="Home" icon="home" />
-        <MicroCard name="Home" icon="home" />
-        <MicroCard name="Home" icon="home" />
-        <MicroCard name="Home" icon="home" />
-        <MicroCard name="Home" icon="home" />
-        <MicroCard name="Home" icon="home" />
-      </ScrollView>
-      <ScrollView
-        style={styles.bannerContainer}
-        showsHorizontalScrollIndicator={false}
-        horizontal={true}
-      >
-        <MicroCard name="Home" icon="home" />
-        <MicroCard name="Home" icon="home" />
-        <MicroCard name="Home" icon="home" />
-        <MicroCard name="Home" icon="home" />
-        <MicroCard name="Home" icon="home" />
-        <MicroCard name="Home" icon="home" />
-        <MicroCard name="Home" icon="home" />
-        <MicroCard name="Home" icon="home" />
-        <MicroCard name="Home" icon="home" />
-        <MicroCard name="Home" icon="home" />
+        {data.map((item: Iprops) => {
+          return <MicroCard key={item.key} name={item.name} icon={item.icon} />;
+        })}
       </ScrollView>
     </ScrollView>
   );
@@ -66,7 +85,7 @@ const styles = StyleSheet.create({
     marginTop: "20%",
     marginBottom: "8%",
     paddingStart: "5%",
-  
+
     //   borderWidth: 4
   },
   message: {
@@ -80,11 +99,12 @@ const styles = StyleSheet.create({
   bannerContainer: {
     flex: 2,
     // borderWidth: 1//
+    // marginBottom:90
   },
   cardsWrapper: {
- flexDirection:"row",
- justifyContent:"space-between",
- paddingEnd:10,
- flexWrap:"wrap"
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingEnd: 10,
+    flexWrap: "wrap",
   },
 });
