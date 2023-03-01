@@ -9,7 +9,7 @@ interface Iprops {
 }
 export default function FuncCard({ name, icon, onClick }: Iprops) {
   return (
-    <View style={styles.container} onTouchStart={onClick}>
+    <View style={styles.container} onTouchEndCapture={onClick}>
       <View>
         <Icon name={icon} size={50} color={"#4E4E4E"} />
       </View>

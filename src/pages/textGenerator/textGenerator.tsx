@@ -40,7 +40,7 @@ export default function TextGenerator() {
 
   useEffect(() => {
     Alert.alert(
-      "Aqui consegues adicionar palavras que tenhas dificuladade em pronunciar"
+      "Gerador de texto com palavras que tenhas dificuladade em pronunciar"
     );
     stopSpeak();
   }, []);
@@ -93,7 +93,7 @@ export default function TextGenerator() {
         delay={500}
         style={styles.containerHeader}
       >
-        <Text style={styles.message}>Gerador de Textos</Text>
+        <Text style={styles.message}>Gerador de Textos com palavras difíceis</Text>
 
         <View>
           <Text></Text>
