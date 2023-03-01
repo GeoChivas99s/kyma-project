@@ -17,13 +17,14 @@ import axios from "axios";
 export default function Reader() {
   const [loading, setLoading] = useState(true);
   const [text, setText] = useState("");
+  const PROMPT =
+    "Gere um texto em Português para praticar a leitura e garanta que o novo texto não é o mesmo gerado anteriomente"
   const generateText = async () => {
     setLoading(true);
     stopSpeak();
     try {
       const data = await axios.post("http://192.168.0.100:5000/api/chatGpt", {
-        prompt:
-          "Crie um texto aleatório em pt para poder praticar a leitura sem repetir a resposta já gerada por ti",
+        prompt: PROMPT,
       });
       setText(data.data);
       setLoading(false);
@@ -42,7 +43,7 @@ export default function Reader() {
 
   const speak = () => {
     Speech.speak(text, {
-      language: "pt-BR",
+      language: "pt-PT",
       pitch: 1,
       rate: 0.7,
     });
