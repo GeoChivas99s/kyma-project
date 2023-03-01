@@ -121,7 +121,7 @@ export default function TextGenerator() {
             onPress={handleSubmit}
           >
             <Text style={styles.buttonText}>
-              <Icon name="play" size={40} />
+              <Icon name="search" size={40} />
             </Text>
           </TouchableOpacity>
           {/* <TouchableOpacity
