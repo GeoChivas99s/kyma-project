@@ -42,6 +42,7 @@ export default function Reader() {
   }, []);
 
   const speak = () => {
+    stopSpeak();
     Speech.speak(text, {
       language: "pt-PT",
       pitch: 1,
