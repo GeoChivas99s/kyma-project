@@ -29,9 +29,10 @@ export const styles = StyleSheet.create({
     input: {
       borderWidth: 1,
       borderColor: "#8381ca",
-      height: 60 , 
+      height: 58 , 
       borderBottomLeftRadius:10,
       borderTopLeftRadius:10, 
+      padding: 20,
      // marginBottom: 12 , 
       fontSize: 16, 
       width:"80%",
