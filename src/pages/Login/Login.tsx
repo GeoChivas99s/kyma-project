@@ -38,7 +38,7 @@ export default function Login() {
         <TextInput placeholder="Digite o seu email" style={styles.input} />
 
         <Text style={styles.title}>Senha</Text>
-        <TextInput placeholder="Sua senha" style={styles.input} />
+        <TextInput placeholder="Sua senha"  style={styles.input} />
 
         <TouchableOpacity
           style={styles.button}
