@@ -16,13 +16,14 @@ import { useNavigation } from "@react-navigation/native";
 import * as Speech from "expo-speech";
 import Icon from "react-native-vector-icons/Ionicons";
 import axios from "axios";
+import { sortAndDeduplicateDiagnostics } from "typescript";
 
 export default function TextGenerator() {
   const [loading, setLoading] = useState(false);
   const [text, setText] = useState("");
   const [textInput, setTextInput] = useState("");
   const PROMPT =
-    "Gere um texto em Português para praticar a leitura e garanta que o novo texto não é o mesmo gerado anteriomente";
+    `Gere um texto em Português para praticar a leitura e garanta que o novo texto não é o mesmo gerado anteriomente contento a palavra ${textInput} de forma predomimante `;
   const generateText = async (prompt: string) => {
     setLoading(true);
     stopSpeak();
@@ -47,8 +48,11 @@ export default function TextGenerator() {
   const handleSubmit = () => {
     if (textInput === "") {
       Alert.alert("Escreva uma palavra");
+    } else {
+      const prompt = PROMPT.concat(textInput);
+      generateText(prompt);
+      setTextInput("");
     }
-    generateText("d");
   };
 
   const speak = () => {
@@ -108,6 +112,7 @@ export default function TextGenerator() {
             onChangeText={(text) => setTextInput(text)}
             placeholder="Adicione uma palavra que tenha dificuldade em pronunciar"
             style={styles.input}
+            value={textInput}
           />
 
           <TouchableOpacity
@@ -130,7 +135,7 @@ export default function TextGenerator() {
           </TouchableOpacity> */}
         </View>
         <ScrollView
-          style={{ width: "100%", padding: 5, height: "100%", marginTop: 30 }}
+          style={{ width: "100%", padding: 5, height: "100%", marginTop: 5 }}
         >
           {loading ? (
             <ActivityIndicator size={"large"} />
