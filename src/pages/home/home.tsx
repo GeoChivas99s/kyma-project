@@ -62,7 +62,7 @@ export default function Home() {
       <View style={styles.cardsWrapper}>
         <FuncCard name="Leitura Assistida" icon="book" onClick={()=>navigate.navigate("Reader")}/>
         <FuncCard name="Gerador de texto" icon="text" onClick={()=>navigate.navigate("TextGenerator")}    />
-        <FuncCard name="Efeito playback atrasado" icon="mic" />
+        <FuncCard name="Efeito playback atrasado"   icon="mic"   onClick={()=>navigate.navigate("AudioRecorder")}/>
         <FuncCard name="Alguns exercícios" icon="information-circle" />
       </View>
 

@@ -3,6 +3,7 @@ import Login from "../Login/Login";
 import SignUp from "../SignUp/SignUp";
 import { Main } from "./main";
 import Reader from "../reader/reader";
+import AudioRecorder from "../audioRecorder/audioRecorder";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TextGenerator from "../textGenerator/textGenerator";
 const Stack = createNativeStackNavigator();
@@ -39,6 +40,11 @@ export function Routes() {
       <Stack.Screen
         name="TextGenerator"
         component={TextGenerator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="AudioRecorder"
+        component={AudioRecorder}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
