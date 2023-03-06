@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Audio } from "expo-av";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-
+import * as Animatable from "react-native-animatable";
+import { styles } from "./audioRecorder.styles";
+import Icon from "react-native-vector-icons/Ionicons";
 export default function AudioRecorder() {
   type Iprops = {
     stopAndUnloadAsync: () => void;
@@ -28,7 +30,9 @@ export default function AudioRecorder() {
         console.log("Starting recording..");
 
         const { recording } = await Audio.Recording.createAsync(
-          Audio.RecordingOptionsPresets.HIGH_QUALITY
+          Audio.RecordingOptionsPresets.HIGH_QUALITY, 
+          
+        
         );
         setRecording(recording);
         console.log("Recording started");
@@ -54,7 +58,10 @@ export default function AudioRecorder() {
       allowsRecordingIOS: false,
     });
     const { sound, status } = await recording.createNewLoadedSoundAsync();
+    
     const uri = recording.getURI();
+
+    
     let records: any = [...recordings];
     records.push({
       uri: uri,
@@ -64,9 +71,13 @@ export default function AudioRecorder() {
 
     setRecordings(records);
   }
-
+  async function increaseSpeed(sound :any) {
+    await sound.setPitchAsync(1.5);
+  }
   function getRecordLines() {
-    return recordings.map((recordingLine:any, index) => {
+
+    return recordings.map((recordingLine: any, index) => {
+        increaseSpeed(recordingLine.sound.setRateAsync(.7))
       return (
         <View key={index}>
           <Text>
@@ -80,33 +91,55 @@ export default function AudioRecorder() {
     });
   }
   return (
-    <View style={styles.container}>
-      <Text>Meu lindfo</Text>
-      <TouchableOpacity
-        //   style={styles.createAudioButton}
-        onPress={recording ? stopRecording : startRecording}
-      >
-        <Text>{recording ? "Parar" : "Gravar"}</Text>
-      </TouchableOpacity>
+    // <View style={styles.container}>
+    //   <Text>Meu lindfo</Text>
+    //   <TouchableOpacity
+    //     //   style={styles.createAudioButton}
+    //     onPress={recording ? stopRecording : startRecording}
+    //   >
+    //     <Text>{recording ? "Parar" : "Gravar"}</Text>
+    //   </TouchableOpacity>
 
-      <Text>Meus audios</Text>
-      {getRecordLines()}
+    //   <Text>Meus audios</Text>
+    //   {getRecordLines()}
+    // </View>
+    <View style={styles.container}>
+      <Animatable.View
+        animation="fadeInLeft"
+        delay={500}
+        style={styles.containerHeader}
+      >
+        <Text style={styles.message}>Audio com efeito playback atrasado</Text>
+
+        <View>
+          <Text></Text>
+        </View>
+      </Animatable.View>
+      <Animatable.View animation="fadeInUp" style={styles.containerForm}>
+        <View
+          style={{
+            flexDirection: "row",
+            marginTop: 100,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <TouchableOpacity
+            style={styles.createAudioButton}
+            onPress={recording ? stopRecording : startRecording}
+          >
+            <Text>
+              <Icon
+                name={recording ? "stop" : "play"}
+                size={40}
+                color={"#fff"}
+              />
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <Text>Meus audios</Text>
+       {getRecordLines()}
+      </Animatable.View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 100,
-    borderWidth: 2,
-    height: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "cyan",
-  },
-  button: {
-    width: 100,
-    height: 40,
-  },
-});

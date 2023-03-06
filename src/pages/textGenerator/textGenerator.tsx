@@ -28,7 +28,7 @@ export default function TextGenerator() {
     setLoading(true);
     stopSpeak();
     try {
-      const data = await axios.post("http://192.168.0.100:5000/api/chatGpt", {
+      const data = await axios.post("http://192.168.0.104:5000/api/chatGpt", {
         prompt: PROMPT,
       });
       setText(data.data);
