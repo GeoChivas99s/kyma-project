@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Audio } from "expo-av";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
+
 import * as Animatable from "react-native-animatable";
 import { styles } from "./audioRecorder.styles";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -33,9 +34,7 @@ export default function AudioRecorder() {
         console.log("Starting recording..");
 
         const { recording } = await Audio.Recording.createAsync(
-          Audio.RecordingOptionsPresets.HIGH_QUALITY, 
-          
-        
+          Audio.RecordingOptionsPresets.HIGH_QUALITY
         );
         setRecording(recording);
         console.log("Recording started");
@@ -52,7 +51,7 @@ export default function AudioRecorder() {
     const secondsDisplay = sec < 10 ? `0${sec}` : sec;
     return `${minutesDisplay}:${secondsDisplay}`;
   };
-console.log(":::")
+  console.log(":::");
   async function stopRecording() {
     console.log("Stopping recording..");
     setRecording(undefined);
@@ -61,10 +60,9 @@ console.log(":::")
       allowsRecordingIOS: false,
     });
     const { sound, status } = await recording.createNewLoadedSoundAsync();
-    
+
     const uri = recording.getURI();
 
-    
     let records: any = [...recordings];
     records.push({
       uri: uri,
@@ -73,36 +71,40 @@ console.log(":::")
     });
 
     setRecordings(records);
-    console.log("::::", uri)
+    console.log("::::", uri);
   }
-  async function increaseSpeed(sound :any) {
-    await sound.setPitchAsync(1.5);
+  async function increaseSpeed(sound: any) {
+    await sound.setRateAsync(0.8, false);
   }
-
 
   const generateText = async (uri: string) => {
-    
     try {
-      const data = await axios.post("http://192.168.0.104:5000/api/diagnostic", {
-        prompt: uri,
-      });
-    console.log("data", data)
+      const data = await axios.post(
+        "http://192.168.0.100:5000/api/diagnostic",
+        {
+          prompt: uri,
+        }
+      );
+      console.log("data", data);
     } catch (ee) {
       console.log(ee);
     }
   };
 
-
   function getRecordLines() {
-
     return recordings.map((recordingLine: any, index) => {
-        // increaseSpeed(recordingLine.sound.setRateAsync(.7))
+      increaseSpeed(recordingLine.sound);
       return (
         <View key={index}>
           <Text>
             Gravação {index + 1} - {recordingLine.duration}
           </Text>
-          <TouchableOpacity onPress={() =>{ recordingLine.sound.playAsync(); generateText(recordingLine.uri)}}>
+          <TouchableOpacity
+            onPress={() => {
+              recordingLine.sound.playAsync();
+              // generateText(recordingLine.uri);
+            }}
+          >
             <Text>Play</Text>
           </TouchableOpacity>
         </View>
@@ -157,7 +159,7 @@ console.log(":::")
           </TouchableOpacity>
         </View>
         <Text>Meus audios</Text>
-       {getRecordLines()}
+        {getRecordLines()}
       </Animatable.View>
     </View>
   );
