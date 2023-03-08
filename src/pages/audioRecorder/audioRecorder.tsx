@@ -4,6 +4,9 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { styles } from "./audioRecorder.styles";
 import Icon from "react-native-vector-icons/Ionicons";
+
+import axios from "axios";
+
 export default function AudioRecorder() {
   type Iprops = {
     stopAndUnloadAsync: () => void;
@@ -49,7 +52,7 @@ export default function AudioRecorder() {
     const secondsDisplay = sec < 10 ? `0${sec}` : sec;
     return `${minutesDisplay}:${secondsDisplay}`;
   };
-
+console.log(":::")
   async function stopRecording() {
     console.log("Stopping recording..");
     setRecording(undefined);
@@ -70,20 +73,36 @@ export default function AudioRecorder() {
     });
 
     setRecordings(records);
+    console.log("::::", uri)
   }
   async function increaseSpeed(sound :any) {
     await sound.setPitchAsync(1.5);
   }
+
+
+  const generateText = async (uri: string) => {
+    
+    try {
+      const data = await axios.post("http://192.168.0.104:5000/api/diagnostic", {
+        prompt: uri,
+      });
+    console.log("data", data)
+    } catch (ee) {
+      console.log(ee);
+    }
+  };
+
+
   function getRecordLines() {
 
     return recordings.map((recordingLine: any, index) => {
-        increaseSpeed(recordingLine.sound.setRateAsync(.7))
+        // increaseSpeed(recordingLine.sound.setRateAsync(.7))
       return (
         <View key={index}>
           <Text>
             Gravação {index + 1} - {recordingLine.duration}
           </Text>
-          <TouchableOpacity onPress={() => recordingLine.sound.playAsync()}>
+          <TouchableOpacity onPress={() =>{ recordingLine.sound.playAsync(); generateText(recordingLine.uri)}}>
             <Text>Play</Text>
           </TouchableOpacity>
         </View>
