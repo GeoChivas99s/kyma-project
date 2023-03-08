@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Audio } from "expo-av";
 import { View, Text, TouchableOpacity } from "react-native";
-
+import * as FileSystem from 'expo-file-system';
 import * as Animatable from "react-native-animatable";
 import { styles } from "./audioRecorder.styles";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -79,13 +79,17 @@ export default function AudioRecorder() {
 
   const generateText = async (uri: string) => {
     try {
-      const data = await axios.post(
-        "http://192.168.0.100:5000/api/diagnostic",
-        {
-          prompt: uri,
-        }
-      );
-      console.log("data", data);
+      const fileExists = await FileSystem.getInfoAsync(uri)
+   if(fileExists){
+    console.log("aaaa", fileExists)
+   }
+      // const data = await axios.post(
+      //   "http://192.168.0.100:5000/api/diagnostic",
+      //   {
+      //     prompt: uri,
+      //   }
+      // );
+      // console.log("data", data);
     } catch (ee) {
       console.log(ee);
     }
@@ -102,7 +106,7 @@ export default function AudioRecorder() {
           <TouchableOpacity
             onPress={() => {
               recordingLine.sound.playAsync();
-              // generateText(recordingLine.uri);
+               generateText(recordingLine.uri);
             }}
           >
             <Text>Play</Text>
