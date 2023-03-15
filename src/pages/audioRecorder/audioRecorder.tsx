@@ -71,7 +71,7 @@ export default function AudioRecorder() {
     });
 
     setRecordings(records);
-    console.log("::::", uri);
+    // console.log("::::", uri);
   }
   async function increaseSpeed(sound: any) {
     await sound.setRateAsync(0.8, false);
@@ -79,17 +79,18 @@ export default function AudioRecorder() {
 
   const generateText = async (uri: string) => {
     try {
-      const fileExists = await FileSystem.getInfoAsync(uri)
-   if(fileExists){
-    console.log("aaaa", fileExists)
-   }
-      // const data = await axios.post(
-      //   "http://192.168.0.100:5000/api/diagnostic",
-      //   {
-      //     prompt: uri,
-      //   }
-      // );
-      // console.log("data", data);
+  //     const fileExists = await FileSystem.getInfoAsync(uri)
+  //  if(fileExists){
+  //   console.log("aaaa", fileExists)
+  //  }
+      const data = await axios.post(
+        "http://192.168.0.104:5000/api/diagnostic",
+        {
+          prompt: uri,
+        }
+      );
+      console.log("data", data.data);
+
     } catch (ee) {
       console.log(ee);
     }
