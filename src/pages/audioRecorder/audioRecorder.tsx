@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Audio } from "expo-av";
-import { View, Text, TouchableOpacity } from "react-native";
-import * as FileSystem from 'expo-file-system';
+import { View, Text, TouchableOpacity, Platform } from "react-native";
+import * as FileSystem from "expo-file-system";
 import * as Animatable from "react-native-animatable";
 import { styles } from "./audioRecorder.styles";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -56,41 +56,59 @@ export default function AudioRecorder() {
     console.log("Stopping recording..");
     setRecording(undefined);
     await recording.stopAndUnloadAsync();
-    await Audio.setAudioModeAsync({
-      allowsRecordingIOS: false,
-    });
-    const { sound, status } = await recording.createNewLoadedSoundAsync();
-
+    // await Audio.setAudioModeAsync({
+    //   allowsRecordingIOS: false,
+    // });
     const uri = recording.getURI();
+    // const { sound, status } = await recording.createNewLoadedSoundAsync();
 
     let records: any = [...recordings];
     records.push({
       uri: uri,
-      sound: sound,
-      duration: getDurationFormated(status.durationMillis),
+      //  sound: sound,
+      // duration: getDurationFormated(status.durationMillis),
     });
 
     setRecordings(records);
     // console.log("::::", uri);
   }
-  async function increaseSpeed(sound: any) {
-    await sound.setRateAsync(0.8, false);
-  }
+  // async function increaseSpeed(sound: any) {
+  //   await sound.setRateAsync(0.8, false);
+  // }
 
-  const generateText = async (uri: string) => {
+  const generateText = async (url: string) => {
     try {
-  //     const fileExists = await FileSystem.getInfoAsync(uri)
-  //  if(fileExists){
-  //   console.log("aaaa", fileExists)
-  //  }
-      const data = await axios.post(
-        "http://192.168.0.104:5000/api/diagnostic",
-        {
-          prompt: uri,
-        }
-      );
-      console.log("data", data.data);
+      //     const fileExists = await FileSystem.getInfoAsync(uri)
+      //  if(fileExists){
+      //   console.log("aaaa", fileExists)
+      //  }
 
+      const { uri } = await FileSystem.getInfoAsync(url);
+
+      // const audioBlob = await FileSystem.readAsStringAsync(audioFile.uri, {
+      //   encoding: FileSystem.EncodingType.Base64,
+      // });
+      // const nameAudio = uri.split("/").reverse()[0]
+
+      // const audio = new File([audioBlob], nameAudio, {
+      //   type: 'audio/m4a',
+      // });
+      const formData = new FormData();
+      formData.append("file", {
+        uri,
+        type: Platform.OS === "ios" ? "audio/m4a" : "audio/x-wav",
+        name: Platform.OS === "ios" ? `${Date.now()}.m4a` : `${Date.now()}.wav`,
+      });
+      console.info("formData", formData.getAll("file"));
+      const data = await fetch("http://192.168.0.104:5000/api/diagnostic", {
+        method:"POST",
+        headers: {
+          'Content-Type': 'multipart/form-data',
+
+        },
+        body: formData,
+      });
+      console.log("data", await data.json());
     } catch (ee) {
       console.log(ee);
     }
@@ -98,16 +116,22 @@ export default function AudioRecorder() {
 
   function getRecordLines() {
     return recordings.map((recordingLine: any, index) => {
-      increaseSpeed(recordingLine.sound);
+      // increaseSpeed(recordingLine.sound);
       return (
         <View key={index}>
           <Text>
-            Gravação {index + 1} - {recordingLine.duration}
+            Gravação {index + 1} -{/* {recordingLine.duration} */}
           </Text>
           <TouchableOpacity
+            style={{
+              width: 100,
+              borderWidth: 2,
+              height: 100,
+              backgroundColor: "#fe34",
+            }}
             onPress={() => {
-              recordingLine.sound.playAsync();
-               generateText(recordingLine.uri);
+              //  recordingLine.sound.playAsync();
+              generateText(recordingLine.uri);
             }}
           >
             <Text>Play</Text>
