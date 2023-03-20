@@ -57,15 +57,16 @@ export function Main() {
       })}
     >
       <Tab.Screen
-        name="Account"
-        component={Account}
-        options={{ headerShown: false }}
-      ></Tab.Screen>
-      <Tab.Screen
         name="Home"
         component={Home}
         options={{ headerShown: false }}
       ></Tab.Screen>
+      <Tab.Screen
+        name="Account"
+        component={Account}
+        options={{ headerShown: false }}
+      ></Tab.Screen>
+      
       <Tab.Screen
         name="Chat"
         component={Chat}
